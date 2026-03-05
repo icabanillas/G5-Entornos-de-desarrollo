@@ -6,7 +6,7 @@ import java.util.List;
  * @author inteltg
  */
 public class Principal {
-    public List<String> usuarios = new ArrayList<>(); //esto no funciona, debe de guardar los datos de nombre y email, no solo nombre
+    public List<String> usuarios = new ArrayList<>(); //esto no funciona, debe de guardar los datos de nombre, email, password y edad, no solo nombre
     
     // Este método es demasiado grande y hace de todo (God Object / Long Method)
     public void registrarUsuario(String nombre, String email, String password, int edad) {
@@ -19,12 +19,12 @@ public class Principal {
         // Validación de email (Duplicada más abajo)
         if (!email.contains("@") || !email.contains(".")) { //crear un metodo de verificacion por si cambia, no cambiar en dos lado solo uno
             System.out.println("Error: Email inválido");
-            return; //mala practica (crear excepcion) o mensaje de alerta
+            return; //mala practica, crear excepcion o mensaje de alerta
         }
 
         // Lógica de registro
         if (edad >= 18) {
-            usuarios.add(nombre);
+            usuarios.add(nombre); //guarda solo el nombre del usuario, no guarda ningun otro dato
             System.out.println("Usuario " + nombre + " registrado con éxito.");
             // Simulación de envío de email
             System.out.println("Enviando correo de bienvenida a: " + email);
@@ -36,13 +36,13 @@ public class Principal {
     public void actualizarEmail(String nombre, String nuevoEmail) {
         // VALIDACIÓN DUPLICADA: Es exactamente la misma que en registrarUsuario
         if (!nuevoEmail.contains("@") || !nuevoEmail.contains(".")) { //igual que registrar usuario, requiere metodo individual
-            System.out.println("Error: Email inválido");
-            return; //mala practica (crear excepcion) o mensaje de alerta
+            System.out.println("Error: Email inválido"); //mensaje de alerta
+            return; //mala practica, crear excepcion o mensaje de alerta
         }
 
-        for (int i = 0; i < usuarios.size(); i++) {
-            if (usuarios.get(i).equals(nombre)) {
-                System.out.println("Email actualizado para " + nombre + " a " + nuevoEmail);
+        for (int i = 0; i < usuarios.size(); i++) { //puede dar error si usuarios esta vacio, requiere un if antes del for para evitar una exception
+            if (usuarios.get(i).equals(nombre)) { //solo es capaz de comparar si el nombre esta escrito igual, distingue mayusculas de minusculas, reemplazar por un equalsIgnoreCase
+                System.out.println("Email actualizado para " + nombre + " a " + nuevoEmail); //solo muestra un mensaje, no cambia el email
             }
         }
     }
@@ -50,7 +50,7 @@ public class Principal {
     
     
     // Método que debería estar en otra clase (Falta de cohesión)
-    public void exportarLogs() { //esto no debe de estar aqui y no hace nada
-        System.out.println("Exportando logs de actividad a un archivo...");
+    public void exportarLogs() { //no exporta ningun log
+        System.out.println("Exportando logs de actividad a un archivo..."); //muestra un mensaje por pantalla
     }
 }
