@@ -1,0 +1,17 @@
+DOCUMENTACIÓN DE LOS CAMBIOS REALIZADOS:
+
+Cambio del contenido de List<String> a <Usuario> (Objeto)
+Replace Primitive with Object traducido al español sería reemplazar primitivo por objeto, es decir reemplazo el dato String que es una cadena de caracteres por un objeto.
+
+Remuevo los returns de en medias del código ya que es una mala práctica, este proceso se conoce como Single Entry, Single Exit que traducido al español es Entrada única, salida única.
+
+Seguido las validaciones las paso directo al objeto donde, este cambio se conoce como Self-Validation o Auto-Validación
+
+Creo una Exception personal, este método es conocido como Creating a Custom Exception o User-Defined Exception que traducido se entiende como crear una excepción personalizada o excepción definida por el usuario
+
+Creo un método independiente para simular el envió del correo esto se llama Extract Method
+
+Con el método exportarLogs lo paso a una nueva clase, esto se conoce como Extract Class
+
+
+Hecho por: inteltg
