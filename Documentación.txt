@@ -18,6 +18,10 @@ Creo un método independiente para simular el envió del correo esto se llama Ex
 
 Con el método exportarLogs lo paso a una nueva clase, esto se conoce como Extract Class
 
+El método enviarEmail de la clase de GestionUsuarios lo he pasado a la clase que crea los objetos usuario, este proceso se conoce como Move Method.
+Este cambio lo hago para manejar los envios de los emails directamente desde usuario y lo vuelvo private para que no pueda ser convocado de forma externa del objeto.
+Este otro cambio se conoce como Internal Event Trigger, que se activa una vez al crear al usuario.
 
+Reemplazo el List por un ArrayList, este cambio lo hago para concretar una implementación. A esto se le conoce como Import Optimization lo que reduce el ruido.
 
 Hecho por: inteltg
