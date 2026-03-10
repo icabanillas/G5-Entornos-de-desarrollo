@@ -9,9 +9,10 @@ package Ent_Des;
  * @author inteltg
  */
 public class Error_Des extends Exception{
-
+//Heredo las funciones de la clase Exception para crear mi propia exception para controlar
     public Error_Des(String message) { //creo mi propio error para controlar la creacion de usuario
         super(message);
     }
     
 }
+
