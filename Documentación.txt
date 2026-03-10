@@ -2,16 +2,22 @@ DOCUMENTACIÓN DE LOS CAMBIOS REALIZADOS:
 
 Cambio del contenido de List<String> a <Usuario> (Objeto)
 Replace Primitive with Object traducido al español sería reemplazar primitivo por objeto, es decir reemplazo el dato String que es una cadena de caracteres por un objeto.
+Este cambio lo hago para poder guardar y almacenar la información del usuario como su nombre, edad, email, contrasrña. Esta mejora y cambio es significativo sobre el código original debido a que el original solo guardaba el nombre del usuario
 
 Remuevo los returns de en medias del código ya que es una mala práctica, este proceso se conoce como Single Entry, Single Exit que traducido al español es Entrada única, salida única.
+Este cambio lo realizo para que el código se ejecute hasta el fin y no se salga en medias.
 
 Seguido las validaciones las paso directo al objeto donde, este cambio se conoce como Self-Validation o Auto-Validación
+Hago las vqlidaciones en objeto para tener más control y para implementar mi propia Excepción.
 
 Creo una Exception personal, este método es conocido como Creating a Custom Exception o User-Defined Exception que traducido se entiende como crear una excepción personalizada o excepción definida por el usuario
+Esto lo hago con el fin de controlar la creación de usuarios inválidos.
+Por ejemplo: un usuario con -15 años o uno con 5890 años.
 
 Creo un método independiente para simular el envió del correo esto se llama Extract Method
 
 Con el método exportarLogs lo paso a una nueva clase, esto se conoce como Extract Class
+
 
 
 Hecho por: inteltg
