@@ -41,7 +41,7 @@ public class Metodos {
     public void enviarEmail(List<Usuario> data, int edad) {
         if (edad >= 18) { //si la edad es 18 o mas, simula el envio de un email
             System.out.println("Enviando correo a " + data.getLast());
-        } else { //si no es mayor de edad, si informa
+        } else { //si no es mayor de edad, se informa al usuario que es menor de edad
             System.out.println("El usuario es demasiado joven (-18)");
         }
     }
@@ -54,7 +54,7 @@ public class Metodos {
      */
     public void actualizarEmail(List<Usuario> data, String nombre, String nuevoEmail) {
         boolean encontrado = false;
-        if (!data.isEmpty()) { //si la lista de usuarios esta vacio se informa si no, se continua la busqueda del usuario
+        if (!data.isEmpty()) { //si la lista de usuarios esta vacio se informa si no continua la busqueda del usuario
             for (int ini = 0; ini < data.size() && !encontrado; ini++) { //for para recorrer la lista, solo la recorre si hay un next y no se ha encontrado al usuario
                 Usuario user = data.get(ini);
                 if (user.getNombre().equalsIgnoreCase(nombre)) { //si el nombre coincide (ignorando mayusculsa y minusculas)
@@ -71,3 +71,4 @@ public class Metodos {
         }
     }
 }
+
