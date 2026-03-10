@@ -13,11 +13,10 @@ public class GestionUsuarios {
     // Este método es demasiado grande y hace de todo (God Object / Long Method)
     public void registrarUsuario(String nombre, String email, String password, int edad) {
         // Validación de nombre
-        if (nombre == null || nombre.isEmpty()) {                       //nsklbvgjksbvgils
+        if (nombre == null || nombre.isEmpty()) {                      
             System.out.println("Error: Nombre inválido");
             return;
         }
-        System.out.println("sjdsbfbkggherge");
 
         // Validación de email (Duplicada más abajo)
         if (!email.contains("@") || !email.contains(".")) {
