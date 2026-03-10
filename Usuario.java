@@ -46,7 +46,7 @@ public class Usuario {
      * Setter de Edad
      */
     public void setEdad(int edad) throws Error_Des {
-        if (edad >= 0 || edad > 120) { //limito la edad entre 0 y 120 (ya es muy raro que alguien viva mas de 120 anyos)
+        if (edad >= 0 && edad < 130) { //limito la edad entre 0 y 129 (ya es muy raro que alguien viva mas de 129 años)
             this.edad = edad;
         } else {
             throw new Error_Des("Age is not valid");
@@ -119,12 +119,12 @@ public class Usuario {
      * Salta error si es invalido
      */
     public boolean ValidadorEmail(String mail) throws Error_Des {
-        if (mail.isBlank() || mail.length() > 8) { //si el email esta en blanco o tiene una longitud inferior a 8 salta error
-            throw new Error_Des("Email length under 8");
+        if (mail.isBlank()) { //si el email esta en blanco salta un error
+            throw new Error_Des("Email field is empty");
         } else {
-            if (mail.contains(".") && mail.contains("@")) { //si el email carece de @ y de . salta error
+            if (mail.contains(".") && mail.contains("@")) { //si el email contiene de @ y de . devuelve verdadero indicando que es valido
                 return true; //si cumple con la estructura de un email, devuelve verdadero y el correo es valido
-            } else {
+            } else { //de lo contrario salta que el correo no es valido porque falta @ o falta .
                 throw new Error_Des("Email is not valid, miss '@' or '.'");
             }
         }
@@ -142,3 +142,4 @@ public class Usuario {
     }
 
 }
+
