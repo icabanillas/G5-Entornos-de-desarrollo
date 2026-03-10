@@ -11,5 +11,8 @@ package Ent_Des;
 public class Registros {
     public void exportarLogs() { //no hace nada, solo muestra un mensaje por pantalla
         System.out.println("Exportando logs de actividad a un archivo...");
+
+        //Meter codigo para hacerlo funcionar, crear un fichero a nivel de log (registro)
     }
 }
+
