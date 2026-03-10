@@ -33,8 +33,13 @@ public class Usuario {
         setEmail(email);
         setPass(pass);
         setEdad(edad);
+        enviarEmail(email, edad);
     }
-
+    
+    /**
+     * 
+     * @return 
+     */
     public int getEdad() {
         return edad;
     }
@@ -46,14 +51,18 @@ public class Usuario {
      * Setter de Edad
      */
     public void setEdad(int edad) throws Error_Des {
-        if (edad >= 0 && edad < 130) { //limito la edad entre 0 y 129 (ya es muy raro que alguien viva mas de 129 años)
+        if (edad >= 0 || edad < 130) { //limito la edad entre 0 y 129 (ya es muy raro que alguien viva mas de 130 anyos)
             this.edad = edad;
         } else {
             throw new Error_Des("Age is not valid");
         }
 
     }
-
+    
+    /**
+     * 
+     * @return 
+     */
     public String getNombre() {
         return nombre;
     }
@@ -72,7 +81,11 @@ public class Usuario {
         }
 
     }
-
+    
+    /**
+     * 
+     * @return 
+     */
     public String getEmail() {
         return email;
     }
@@ -90,7 +103,12 @@ public class Usuario {
             throw new Error_Des("Error, email is not valid");
         }
     }
-
+    
+    
+    /**
+     * 
+     * @return 
+     */
     public String getPass() {
         return pass;
     }
@@ -119,12 +137,12 @@ public class Usuario {
      * Salta error si es invalido
      */
     public boolean ValidadorEmail(String mail) throws Error_Des {
-        if (mail.isBlank()) { //si el email esta en blanco salta un error
-            throw new Error_Des("Email field is empty");
+        if (mail.isBlank()) { //si el email esta en blanco
+            throw new Error_Des("Email length under 8");
         } else {
-            if (mail.contains(".") && mail.contains("@")) { //si el email contiene de @ y de . devuelve verdadero indicando que es valido
+            if (mail.contains(".") && mail.contains("@")) { //si el email carece de @ y de . salta error
                 return true; //si cumple con la estructura de un email, devuelve verdadero y el correo es valido
-            } else { //de lo contrario salta que el correo no es valido porque falta @ o falta .
+            } else {
                 throw new Error_Des("Email is not valid, miss '@' or '.'");
             }
         }
@@ -140,6 +158,17 @@ public class Usuario {
     public String toString() { //nunca se mostrara la password por seguridad
         return "Usuario{" + "nombre=" + nombre + ", email=" + email + ", edad=" + edad + '}';
     }
-
+    
+    /**
+     * 
+     * @param data
+     * @param edad 
+     */
+    private void enviarEmail(String email, int edad) { //me llevo este metodo de Metodos al objeto Usuarios
+        if (edad >= 18) { //si la edad es 18 o mas, simula el envio de un email
+            System.out.println("Enviando correo a " + email);
+        } else { //si no es mayor de edad, si informa
+            System.out.println("El usuario es demasiado joven (-18)");
+        }
+    }
 }
-
