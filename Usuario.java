@@ -171,4 +171,12 @@ public class Usuario {
             System.out.println("El usuario es demasiado joven (-18)");
         }
     }
+    
+    /**
+     * 
+     */
+    public void extraerRegistro (){ //Introduzco un metodo para poder solicitar los registros
+        Registros reg = new Registros();
+        reg.exportarLogs();
+    }
 }
