@@ -51,7 +51,7 @@ public class Usuario {
      * Setter de Edad
      */
     public void setEdad(int edad) throws Error_Des {
-        if (edad >= 0 || edad < 130) { //limito la edad entre 0 y 129 (ya es muy raro que alguien viva mas de 130 anyos)
+        if (edad >= 0 && edad < 130) { //limito la edad entre 0 y 129 (ya es muy raro que alguien viva mas de 130 anyos)
             this.edad = edad;
         } else {
             throw new Error_Des("Age is not valid");
