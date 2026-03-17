@@ -9,14 +9,16 @@ import java.util.List;
 
 public class GestionUsuarios {
     public List<String> usuarios = new ArrayList<>();
-
-    /*
-     REFACTORIZACIÓN (Principio DRY): 
-     Se pasa la validación del email a un método privado.
-     Antes (!email.contains("@") || !email.contains(".")) estaba repetida 
-     en registrar y actualizar, lo cual dificultaba el mantenimiento.
-     */
     
+    // REFACTORIZACIÓN (Principio SRP): 
+    // Creamos instancias de las clases especializadas.
+    private GestionarEmail gestorEmail = new GestionarEmail();
+    private GestionarLogs gestorLogs = new GestionarLogs();
+
+    /**
+     REFACTORIZACIÓN (Principio DRY):
+     Mantenemos el método centralizado de validación para evitar código duplicado.
+     */
     private boolean esEmailValido(String email) {
         return email != null && email.contains("@") && email.contains(".");
     }
@@ -24,7 +26,6 @@ public class GestionUsuarios {
     public void registrarUsuario(String nombre, String email, String password, int edad) {
         if (nombre == null || nombre.isEmpty()) return;
 
-        // Llamada al método centralizado (Elimina duplicidad)
         if (!esEmailValido(email)) {
             System.out.println("Error: Email inválido");
             return;
@@ -33,12 +34,13 @@ public class GestionUsuarios {
         if (edad >= 18) {
             usuarios.add(nombre);
             System.out.println("Usuario " + nombre + " registrado.");
-            System.out.println("Enviando correo a: " + email);
+            
+            // REFACTORIZACIÓN (SRP): En lugar de un System.out local, llamamos a la clase especialista en comunicaciones.
+            gestorEmail.enviarBienvenida(email);
         }
     }
 
     public void actualizarEmail(String nombre, String nuevoEmail) {
-        // Reutilización del método de validación
         if (!esEmailValido(nuevoEmail)) {
             System.out.println("Error: Email inválido");
             return;
@@ -51,7 +53,11 @@ public class GestionUsuarios {
         }
     }
 
+    /**
+     REFACTORIZACIÓN (SRP): 
+     El método original se mantiene para no romper el programa, pero ahora la lógica real está en la clase GestionarLogs.*/
+    
     public void exportarLogs() {
-        System.out.println("Exportando logs de actividad a un archivo...");
+        gestorLogs.exportarLogs();
     }
 }
