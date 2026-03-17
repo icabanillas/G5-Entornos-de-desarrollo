@@ -18,8 +18,7 @@ public class GestionUsuarios {
             return;
         }
 
-        // Validación de email (Duplicada más abajo)
-        if (!email.contains("@") || !email.contains(".")) {             //Crearemos un metodo para que no se repita el mismo codigo para realizar la misma validacion
+       if (!validarEmail(email)) {                                 //Se utiliza el metodo para la validacion del email
             System.out.println("Error: Email inválido");
             return;
         }
@@ -35,10 +34,10 @@ public class GestionUsuarios {
         }
     }
 
-    public void actualizarEmail(String nombre, String nuevoEmail) {
-        // VALIDACIÓN DUPLICADA: Es exactamente la misma que en registrarUsuario
-        if (!nuevoEmail.contains("@") || !nuevoEmail.contains(".")) {
-            System.out.println("Error: Email inválido");                                         //Agregaremos el metodo para validar el email
+    public void actualizarEmail(String nombre, String nuevoEmail) { 
+       
+       if (!validarEmail(nuevoEmail)) {                            //Se utiliza el metodo para la validacion del email     
+            System.out.println("Error: Email inválido");
             return;
         }
 
@@ -47,11 +46,10 @@ public class GestionUsuarios {
                 System.out.println("Email actualizado para " + nombre + " a " + nuevoEmail);
             }
         }
-    }
-                                                                                                       //Creamos el metodo validarEmail
-    // Método que debería estar en otra clase (Falta de cohesión)
-    public void exportarLogs() {                                                                       //Cambiamos el metodo a otra clase
-        System.out.println("Exportando logs de actividad a un archivo...");
+    }                           
+    
+    private boolean validarEmail(String email) {                            //Creamos el metodo validarEmail y eliminar codigo duplicado
+        return email != null && email.contains("@") && email.contains(".");
     }
 }
 
