@@ -10,46 +10,47 @@ import java.util.List;
 public class GestionUsuarios {
     public List<String> usuarios = new ArrayList<>();
 
-    // Este método es demasiado grande y hace de todo (God Object / Long Method)
-    public void registrarUsuario(String nombre, String email, String password, int edad) {
-        // Validación de nombre
-        if (nombre == null || nombre.isEmpty()) {
-            System.out.println("Error: Nombre inválido");
-            return;
-        }
+    /*
+     REFACTORIZACIÓN (Principio DRY): 
+     Se pasa la validación del email a un método privado.
+     Antes (!email.contains("@") || !email.contains(".")) estaba repetida 
+     en registrar y actualizar, lo cual dificultaba el mantenimiento.
+     */
+    
+    private boolean esEmailValido(String email) {
+        return email != null && email.contains("@") && email.contains(".");
+    }
 
-        // Validación de email (Duplicada más abajo)
-        if (!email.contains("@") || !email.contains(".")) {
+    public void registrarUsuario(String nombre, String email, String password, int edad) {
+        if (nombre == null || nombre.isEmpty()) return;
+
+        // Llamada al método centralizado (Elimina duplicidad)
+        if (!esEmailValido(email)) {
             System.out.println("Error: Email inválido");
             return;
         }
 
-        // Lógica de registro
         if (edad >= 18) {
             usuarios.add(nombre);
-            System.out.println("Usuario " + nombre + " registrado con éxito.");
-            // Simulación de envío de email
-            System.out.println("Enviando correo de bienvenida a: " + email);
-        } else {
-            System.out.println("Error: El usuario debe ser mayor de edad");
+            System.out.println("Usuario " + nombre + " registrado.");
+            System.out.println("Enviando correo a: " + email);
         }
     }
 
     public void actualizarEmail(String nombre, String nuevoEmail) {
-        // VALIDACIÓN DUPLICADA: Es exactamente la misma que en registrarUsuario
-        if (!nuevoEmail.contains("@") || !nuevoEmail.contains(".")) {
+        // Reutilización del método de validación
+        if (!esEmailValido(nuevoEmail)) {
             System.out.println("Error: Email inválido");
             return;
         }
 
-        for (int i = 0; i < usuarios.size(); i++) {
-            if (usuarios.get(i).equals(nombre)) {
-                System.out.println("Email actualizado para " + nombre + " a " + nuevoEmail);
+        for (String u : usuarios) {
+            if (u.equals(nombre)) {
+                System.out.println("Email actualizado para " + nombre);
             }
         }
     }
 
-    // Método que debería estar en otra clase (Falta de cohesión)
     public void exportarLogs() {
         System.out.println("Exportando logs de actividad a un archivo...");
     }
