@@ -9,10 +9,14 @@ import java.util.List;
  
 public class GestionUsuarios {
     public List<String> usuarios = new ArrayList<>();   //Convertimos List por un ArrayList y agregaremos un objeto llamado usuarios
+    
+    //Agregamos las nuevas clases
+    private EmailService CorreoBienvenida = new EmailService();
+    private Logger logger = new Logger();
 
-    // Este método es demasiado grande y hace de todo (God Object / Long Method)
+   
     public void registrarUsuario(String nombre, String email, String password, int edad) {                    
-        // Validación de nombre
+     
         if (nombre == null || nombre.isEmpty()) {                      
             System.out.println("Error: Nombre inválido");
             return;
@@ -23,17 +27,15 @@ public class GestionUsuarios {
             return;
         }
 
-        // Lógica de registro
         if (edad >= 18) {
             usuarios.add(nombre);
-            System.out.println("Usuario " + nombre + " registrado con éxito.");
-            // Simulación de envío de email
-            System.out.println("Enviando correo de bienvenida a: " + email);
+            System.out.println("Usuario " + nombre + " se ha registrado con éxito.");
+            CorreoBienvenida.enviarCorreo(email);                 //Se llama a la clase ServicioDeBienvenida para que solamente se especialice esa clase en enviar el correo de bienvenida, utilizando la Responsabilidad Única (SRP)
         } else {
             System.out.println("Error: El usuario debe ser mayor de edad");
         }
     }
-
+    
     public void actualizarEmail(String nombre, String nuevoEmail) { 
        
        if (!validarEmail(nuevoEmail)) {                            //Se utiliza el metodo para la validacion del email     
@@ -46,7 +48,7 @@ public class GestionUsuarios {
                 System.out.println("Email actualizado para " + nombre + " a " + nuevoEmail);
             }
         }
-    }                           
+    }           
     
     private boolean validarEmail(String email) {                            //Creamos el metodo validarEmail y eliminar codigo duplicado
         return email != null && email.contains("@") && email.contains(".");
